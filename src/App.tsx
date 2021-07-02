@@ -5,12 +5,14 @@ import Users from './secure/users/Users';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './public/Login';
 import Register from './public/Register';
+import RedirectToDashboard from './secure/RedirectToDashboard';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route path={'/'} exact component={Dashboard} />
+        <Route path={'/'} exact component={RedirectToDashboard} />
+        <Route path={'/dashboard'} exact component={Dashboard} />
         <Route path={'/users'} component={Users} />
         <Route path={'/login'} component={Login} />
         <Route path={'/register'} component={Register} />
