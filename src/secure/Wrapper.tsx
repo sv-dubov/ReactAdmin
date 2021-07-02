@@ -8,6 +8,7 @@ class Wrapper extends Component {
     state = {
         redirect: false
     }
+    
     componentDidMount = async () => {
         try {
             const response = await axios.get('user');
