@@ -7,6 +7,7 @@ import Login from './public/Login';
 import Register from './public/Register';
 import RedirectToDashboard from './secure/RedirectToDashboard';
 import UsersCreate from './secure/users/UsersCreate';
+import UserEdit from './secure/users/UserEdit';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path={'/register'} component={Register} />
         <Route path={'/users'} component={Users} exact />
         <Route path={'/users/create'} component={UsersCreate} />
+        <Route path={'/users/edit'} component={UserEdit} />
       </BrowserRouter>
     </div>
   );
