@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { Role } from '../../classes/role';
 
-class UsersCreate extends Component {
+class UserCreate extends Component {
     state = {
         roles: [],
         redirect: false
@@ -39,7 +39,7 @@ class UsersCreate extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/users" />
+            return <Redirect to={'/users'}/>;
         }
 
         return (
@@ -47,15 +47,21 @@ class UsersCreate extends Component {
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label>First Name</label>
-                        <input type="text" className="form-control" name="first_name" />
+                        <input type="text" className="form-control" name="first_name"
+                            onChange={e => this.first_name = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Last Name</label>
-                        <input type="text" className="form-control" name="last_name" />
+                        <input type="text" className="form-control" name="last_name"
+                            onChange={e => this.last_name = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="text" className="form-control" name="email" />
+                        <input type="text" className="form-control" name="email"
+                            onChange={e => this.email = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Role</label>
@@ -69,7 +75,6 @@ class UsersCreate extends Component {
                             })}
                         </select>
                     </div>
-
                     <button className="btn btn-outline-secondary">Save</button>
                 </form>
             </Wrapper>
@@ -77,4 +82,4 @@ class UsersCreate extends Component {
     }
 }
 
-export default UsersCreate;
+export default UserCreate;

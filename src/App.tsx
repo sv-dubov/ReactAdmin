@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './public/Login';
 import Register from './public/Register';
 import RedirectToDashboard from './secure/RedirectToDashboard';
-import UsersCreate from './secure/users/UsersCreate';
+import UserCreate from './secure/users/UserCreate';
 import UserEdit from './secure/users/UserEdit';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Route path={'/login'} component={Login} />
         <Route path={'/register'} component={Register} />
         <Route path={'/users'} component={Users} exact />
-        <Route path={'/users/create'} component={UsersCreate} />
+        <Route path={'/users/create'} component={UserCreate} />
         <Route path={'/users/edit'} component={UserEdit} />
       </BrowserRouter>
     </div>
