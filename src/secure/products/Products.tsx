@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../classes/product';
+import Deleter from '../components/Deleter';
 import Paginator from '../components/Paginator';
 import Wrapper from '../Wrapper';
 
@@ -23,20 +24,17 @@ class Products extends Component {
         this.last_page = response.data.meta.last_page;
     }
 
-    delete = async (id: number) => {
-        if (window.confirm('Are you sure you want to delete this product?')) {
-            await axios.delete(`products/${id}`);
-            this.setState({
-                products: this.state.products.filter((p: Product) => p.id !== id)
-            })
-        }
+    handleDelete = async (id: number) => {
+        this.setState({
+            products: this.state.products.filter((p: Product) => p.id !== id)
+        })
     }
 
     handlePageChange = async (page: number) => {
         this.page = page;
         await this.componentDidMount();
     }
-    
+
     render() {
         return (
             <Wrapper>
@@ -56,7 +54,7 @@ class Products extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.state.products.map(
+                            {this.state.products.map(
                                 (product: Product) => {
                                     return (
                                         <tr key={product.id}>
@@ -69,9 +67,7 @@ class Products extends Component {
                                                 <div className="btn-group mr-2">
                                                     <Link to={`/products/${product.id}/edit`}
                                                         className="btn btn-sm btn-outline-secondary">Edit</Link>
-                                                    <a className="btn btn-sm btn-outline-secondary"
-                                                        onClick={() => this.delete(product.id)}
-                                                    >Delete</a>
+                                                    <Deleter id={product.id} endpoint={'products'} handleDelete={this.handleDelete} />
                                                 </div>
                                             </td>
                                         </tr>
