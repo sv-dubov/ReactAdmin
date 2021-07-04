@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Product } from '../../classes/product';
+import Paginator from '../components/Paginator';
 import Wrapper from '../Wrapper';
 
 class Products extends Component {
@@ -11,11 +12,15 @@ class Products extends Component {
         products: []
     }
 
+    page = 1;
+    last_page = 0;
+
     componentDidMount = async () => {
-        const response = await axios.get('products');
+        const response = await axios.get(`products?page=${this.page}`);
         this.setState({
             products: response.data.data
         })
+        this.last_page = response.data.meta.last_page;
     }
 
     delete = async (id: number) => {
@@ -25,6 +30,11 @@ class Products extends Component {
                 products: this.state.products.filter((p: Product) => p.id !== id)
             })
         }
+    }
+
+    handlePageChange = async (page: number) => {
+        this.page = page;
+        await this.componentDidMount();
     }
     
     render() {
@@ -71,6 +81,7 @@ class Products extends Component {
                         </tbody>
                     </table>
                 </div>
+                <Paginator lastPage={this.last_page} handlePageChange={this.handlePageChange} />
             </Wrapper>
         );
     }
