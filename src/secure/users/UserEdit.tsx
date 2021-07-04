@@ -14,6 +14,7 @@ class UserEdit extends Component<{ match: PropsWithRef<any> }> {
         role_id: 0,
         redirect: false
     }
+
     id = 0;
     first_name = '';
     last_name = '';
@@ -51,27 +52,37 @@ class UserEdit extends Component<{ match: PropsWithRef<any> }> {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/users" />
+            return <Redirect to={'/users'} />;
         }
-        
+
         return (
             <Wrapper>
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label>First Name</label>
-                        <input type="text" className="form-control" name="first_name" defaultValue={this.first_name = this.state.first_name} />
+                        <input type="text" className="form-control" name="first_name"
+                            defaultValue={this.first_name = this.state.first_name}
+                            onChange={e => this.first_name = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Last Name</label>
-                        <input type="text" className="form-control" name="last_name" defaultValue={this.last_name = this.state.last_name} />
+                        <input type="text" className="form-control" name="last_name"
+                            defaultValue={this.last_name = this.state.last_name}
+                            onChange={e => this.last_name = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="text" className="form-control" name="email" defaultValue={this.email = this.state.email} />
+                        <input type="text" className="form-control" name="email"
+                            defaultValue={this.email = this.state.email}
+                            onChange={e => this.email = e.target.value}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Role</label>
-                        <select className="form-control" name="role_id" value={this.role_id = this.state.role_id}
+                        <select className="form-control" name="role_id" 
+                        value={this.role_id = this.state.role_id}
                             onChange={e => {
                                 this.role_id = parseInt(e.target.value);
                                 this.setState({
@@ -79,6 +90,7 @@ class UserEdit extends Component<{ match: PropsWithRef<any> }> {
                                 })
                             }}
                         >
+                            <option>Select role</option>
                             {this.state.roles.map((role: Role) => {
                                 return (
                                     <option key={role.id} value={role.id}>{role.name}</option>
@@ -86,7 +98,6 @@ class UserEdit extends Component<{ match: PropsWithRef<any> }> {
                             })}
                         </select>
                     </div>
-
                     <button className="btn btn-outline-secondary">Save</button>
                 </form>
             </Wrapper>
