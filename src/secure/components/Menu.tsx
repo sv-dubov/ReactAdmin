@@ -19,6 +19,13 @@ const Menu = () => {
                         </NavLink>
                     </li>
                 </ul>
+                <ul className="nav flex-column">
+                    <li className="nav-item">
+                        <NavLink to={'/roles'} className="nav-link">
+                            Roles
+                        </NavLink>
+                    </li>
+                </ul>
             </div>
         </nav>
     )
