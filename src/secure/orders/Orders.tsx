@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,9 +27,22 @@ class Orders extends Component {
         await this.componentDidMount();
     }
 
+    handleExport = async () => {
+        const response = await axios.get('export', {responseType: 'blob'});
+        const blob = new Blob([response.data], {type: 'text/csv'});
+        const dowloadUrl = window.URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = dowloadUrl;
+        link.download = 'orders.csv';
+        link.click();
+    }
+
     render() {
         return (
             <Wrapper>
+                <div className="pt-3 pb-2 mb-3 border-bottom">
+                    <a onClick={this.handleExport} className="btn btn-sm btn-outline-secondary">Export CSV</a>
+                </div>
                 <div className="table-responsive">
                     <table className="table table-striped table-sm">
                         <thead>
