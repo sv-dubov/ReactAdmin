@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { Component, SyntheticEvent } from 'react';
+import { connect } from "react-redux";
 import { User } from '../../classes/user';
 import Wrapper from '../Wrapper';
-
-class Profile extends Component {
+import setUser from '../../redux/actions/setUserAction';
+class Profile extends Component<any> {
     state = {
         first_name: '',
         last_name: '',
@@ -16,25 +17,16 @@ class Profile extends Component {
     password = '';
     password_confirm = '';
 
-    componentDidMount = async () => {
-        const response = await axios.get('user');
-        const user: User = response.data.data;
-
-        this.setState({
-            first_name: user.first_name,
-            last_name: user.last_name,
-            email: user.email,
-        })
-    }
-
     updateInfo = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.put('users/info', {
+        const response = await axios.put('users/info', {
             first_name: this.first_name,
             last_name: this.last_name,
             email: this.email,
-        });
+        })
+        const user: User = response.data;
+        this.props.setUser(user);
     }
 
     updatePassword = async (e: SyntheticEvent) => {
@@ -54,21 +46,21 @@ class Profile extends Component {
                     <div className="form-group">
                         <label>First Name</label>
                         <input type="text" className="form-control" name="first_name"
-                            defaultValue={this.first_name = this.state.first_name}
+                            defaultValue={this.first_name = this.props.user.first_name}
                             onChange={e => this.first_name = e.target.value}
                         />
                     </div>
                     <div className="form-group">
                         <label>Last Name</label>
                         <input type="text" className="form-control" name="last_name"
-                            defaultValue={this.last_name = this.state.last_name}
+                            defaultValue={this.last_name = this.props.user.last_name}
                             onChange={e => this.last_name = e.target.value}
                         />
                     </div>
                     <div className="form-group">
                         <label>Email</label>
                         <input type="text" className="form-control" name="email"
-                            defaultValue={this.email = this.state.email}
+                            defaultValue={this.email = this.props.user.email}
                             onChange={e => this.email = e.target.value}
                         />
                     </div>
@@ -96,4 +88,5 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+// @ts-ignore
+export default connect(state => ({ user: state.user }), dispatch => ({setUser: user => dispatch(setUser(user))}))(Profile);
