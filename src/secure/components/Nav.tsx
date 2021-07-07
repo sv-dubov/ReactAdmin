@@ -34,8 +34,8 @@ class Nav extends Component {
                 <a className="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
 
                 <ul className="my-2 my-md-0 mr-md-3">
-                    {/* <Link to={'/profile'}
-                        className="p-2 text-white text-decoration-none">{this.state.user.first_name} {this.state.user.last_name}</Link> */}
+                    <Link to={'/profile'}
+                        className="p-2 text-white text-decoration-none">{this.state.user.first_name} {this.state.user.last_name}</Link>
                     <a className="p-2 text-white text-decoration-none" href="#" onClick={this.handleClick}>Sign out</a>
                 </ul>
             </nav>
