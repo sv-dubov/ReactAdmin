@@ -26,7 +26,7 @@ class Nav extends Component<{user: User}> {
 
                 <ul className="my-2 my-md-0 mr-md-3">
                     <Link to={'/profile'}
-                        className="p-2 text-white text-decoration-none">{this.props.user.first_name} {this.props.user.last_name}</Link>
+                        className="p-2 text-white text-decoration-none">{this.props.user.name}</Link>
                     <a className="p-2 text-white text-decoration-none" href="#" onClick={this.handleClick}>Sign out</a>
                 </ul>
             </nav>
